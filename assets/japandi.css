@@ -1,0 +1,575 @@
+/* 3Dekoration · Japandi
+ * WordPress and WooCommerce own the markup. These rules style their existing blocks.
+ */
+:root {
+  --jp-paper: #f8f6f0;
+  --jp-washi: #eeebe1;
+  --jp-white: #fffefa;
+  --jp-ink: #292e29;
+  --jp-muted: #586155;
+  --jp-pine: #394b40;
+  --jp-clay: #945836;
+  --jp-line: #c9c9ba;
+  --jp-serif: Cardo, "Iowan Old Style", Baskerville, Georgia, serif;
+  --jp-sans: Inter, "Helvetica Neue", Arial, sans-serif;
+  --jp-gutter: clamp(1.125rem, 4.8vw, 5.25rem);
+  --jp-wide: 80rem;
+  --jp-section-gap: clamp(3rem, 6vw, 6.25rem);
+}
+
+body, .editor-styles-wrapper {
+  --wp--preset--color--base: var(--jp-paper);
+  --wp--preset--color--base-2: var(--jp-white);
+  --wp--preset--color--contrast: var(--jp-ink);
+  --wp--preset--color--contrast-2: var(--jp-muted);
+  --wp--preset--color--accent: var(--jp-washi);
+  --wp--preset--color--accent-2: #c9b49c;
+  --wp--preset--color--accent-3: var(--jp-clay);
+  --wp--preset--color--accent-4: #c0c7b7;
+  --wp--preset--font-family--body: var(--jp-sans);
+  --wp--preset--font-family--heading: var(--jp-serif);
+  --wp--style--global--wide-size: var(--jp-wide);
+  --wp--style--root--padding-left: var(--jp-gutter);
+  --wp--style--root--padding-right: var(--jp-gutter);
+  background-color: var(--jp-paper);
+  color: var(--jp-ink);
+  font-family: var(--jp-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.wp-site-blocks :where(h1, h2, h3, h4), .editor-styles-wrapper :where(h1, h2, h3, h4) {
+  color: var(--jp-ink);
+  font-family: var(--jp-serif);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.wp-site-blocks :where(a) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: .23em;
+}
+
+.wp-site-blocks :where(a, button, select, input, textarea, [tabindex]):focus-visible,
+.wc-block-mini-cart__drawer :focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Masthead. The shop uses ordinary paragraph links beside the account and bag. */
+.wp-site-blocks > header.wp-block-template-part {
+  background: var(--jp-paper);
+  border-bottom: 1px solid var(--jp-line);
+}
+
+.wp-site-blocks > header > .wp-block-group {
+  padding-block: .75rem !important; /* Existing template parts set this inline. */
+}
+
+.wp-site-blocks > header .wp-block-site-logo img {
+  display: block;
+  width: clamp(8rem, 13vw, 11rem);
+  height: auto;
+}
+
+.wp-site-blocks > header .is-layout-flex:has(> .wp-block-woocommerce-customer-account) {
+  column-gap: clamp(.75rem, 2vw, 2rem);
+  row-gap: .25rem;
+}
+
+.wp-site-blocks > header :is(.wp-block-paragraph, .wp-block-navigation-item) a {
+  color: var(--jp-ink);
+  font-size: .9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.wp-site-blocks > header :is(.wp-block-paragraph, .wp-block-navigation-item) a:hover {
+  color: var(--jp-clay);
+  text-decoration: underline;
+}
+
+.wp-site-blocks > header :is(.wc-block-mini-cart__button, .wc-block-customer-account__link) {
+  color: var(--jp-pine);
+}
+
+/* The opening spread pairs the four existing linked photos with the introduction. */
+.home .entry-content > .has-accent-background-color:first-child {
+  isolation: isolate;
+  overflow: clip;
+  position: relative;
+  border-bottom: 1px solid var(--jp-line);
+  padding-block: clamp(2rem, 4.5vw, 5rem) !important;
+}
+
+.home .entry-content > .has-accent-background-color:first-child::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto auto -8rem -5rem;
+  width: 23rem;
+  height: 15rem;
+  background: repeating-radial-gradient(ellipse at 32% 108%,
+    transparent 0 13px, rgb(92 101 78 / 10%) 13px 14px, transparent 14px 21px);
+  mask-image: linear-gradient(to top, #000 35%, transparent 98%);
+  pointer-events: none;
+}
+
+.home .entry-content > .has-accent-background-color > .wp-block-columns {
+  align-items: center !important;
+  gap: clamp(2rem, 5.5vw, 6rem);
+}
+
+.home .entry-content > .has-accent-background-color .is-vertically-aligned-center {
+  padding-inline: 0;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-heading {
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 4.8vw, 4.9rem);
+  line-height: 1;
+  letter-spacing: -.053em;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-heading::before {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 2px;
+  background: var(--jp-clay);
+  margin-block-end: clamp(1.25rem, 2vw, 2rem);
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-paragraph {
+  max-width: 43ch;
+  margin-block-start: 1.4rem;
+  color: var(--jp-muted);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.7;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-columns .wp-block-columns {
+  display: grid;
+  grid-template: repeat(3, minmax(0, 1fr)) / minmax(0, 2.25fr) minmax(0, 1fr);
+  gap: clamp(.35rem, .7vw, .75rem);
+  height: clamp(22rem, 35vw, 31rem);
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-columns .wp-block-columns > .wp-block-column {
+  display: contents;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-image {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  background: #dad7ca;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-columns .wp-block-column:first-child > .wp-block-image:first-child {
+  grid-row: span 3;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-image :is(a, img) {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Keep intrinsic photo dimensions out of grid sizing when lazy images load in WebKit. */
+.home .entry-content > .has-accent-background-color .wp-block-image > a {
+  position: absolute;
+  inset: 0;
+}
+
+.home .entry-content > .has-accent-background-color .wp-block-image img {
+  object-fit: cover;
+}
+
+/* Collection thumbnails keep the shop's own titles, links and focal points. */
+.home .wp-block-group:has(> .kategorier-wide) {
+  margin-block-start: 0;
+  padding: var(--jp-section-gap) var(--jp-gutter) 0;
+}
+
+.home .wp-block-columns.kategorier-wide {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(.625rem, 1.4vw, 1.35rem);
+  max-width: var(--jp-wide);
+  width: 100%;
+}
+
+.kategorier-wide .wc-block-featured-category {
+  min-height: 0;
+  aspect-ratio: 12 / 13;
+  background: var(--jp-pine);
+}
+
+.kategorier-wide .wc-block-featured-category__wrapper {
+  align-content: flex-end;
+}
+
+.kategorier-wide .wc-block-featured-category.has-background-dim .background-dim__overlay::before {
+  opacity: 1;
+  background: linear-gradient(180deg, transparent 35%, rgb(24 28 22 / 24%) 52%, rgb(21 26 21 / 85%) 100%);
+}
+
+.kategorier-wide .wc-block-featured-category__inner-blocks {
+  padding: clamp(.85rem, 1.7vw, 1.6rem);
+  color: #fff;
+}
+
+.kategorier-wide .wp-block-woocommerce-category-title {
+  margin: 0;
+  color: inherit;
+  text-align: left;
+  font-size: clamp(1.45rem, 2.35vw, 2.45rem);
+  line-height: 1.05;
+}
+
+.kategorier-wide .wp-block-buttons {
+  justify-content: flex-start;
+  margin-block-start: .35rem;
+}
+
+.kategorier-wide .wp-block-button .wp-element-button {
+  padding: .15rem 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  font: 500 .875rem/1.6 var(--jp-sans);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+/* The existing category link also covers its photo for touch and pointer input. */
+.kategorier-wide .wp-block-button__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.kategorier-wide .wc-block-featured-category:focus-within {
+  outline: 2px solid var(--jp-ink);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .kategorier-wide .wc-block-featured-category__background-image,
+  .wc-block-product .wc-block-components-product-image img {
+    transition: transform .35s ease-out;
+  }
+
+  .kategorier-wide .wc-block-featured-category:hover .wc-block-featured-category__background-image,
+  .wc-block-product .wc-block-components-product-image a:hover img {
+    transform: scale(1.025);
+  }
+}
+
+/* Product lists are typeset like a catalogue, with a separate purchase action. */
+.home .entry-content > .wp-block-woocommerce-product-collection {
+  margin-block-start: var(--jp-section-gap);
+}
+
+.home .wp-block-woocommerce-product-collection > .wp-block-heading {
+  display: flex;
+  align-items: center;
+  gap: clamp(.8rem, 3vw, 3rem);
+  margin-block-end: clamp(1.5rem, 3vw, 2.75rem) !important;
+  text-align: start;
+  font-size: clamp(2.2rem, 4vw, 3.85rem) !important;
+}
+
+.home .wp-block-woocommerce-product-collection > .wp-block-heading::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--jp-line);
+}
+
+.wp-site-blocks .wc-block-product-template__responsive.columns-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 4.5vw, 4.5rem) clamp(.85rem, 2.3vw, 2.35rem);
+}
+
+.wp-site-blocks :is(.wc-block-product-template__responsive, .products-block-post-template) > .product {
+  min-width: 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--jp-line);
+}
+
+.wp-site-blocks :is(.wc-block-product, .products-block-post-template .product) .wc-block-components-product-image {
+  margin-bottom: 1rem;
+  background: var(--jp-washi);
+}
+
+.wp-site-blocks .wc-block-components-product-image a {
+  display: block;
+  overflow: hidden;
+}
+
+.wp-site-blocks :is(.wc-block-product, .products-block-post-template .product) .wp-block-post-title {
+  margin-block: 0 .3rem !important;
+  text-align: start;
+  font-size: clamp(1.35rem, 2.15vw, 2.1rem) !important;
+  line-height: 1.18 !important;
+}
+
+.wp-site-blocks .product .wp-block-post-title a, .wc-block-grid__product-link {
+  color: var(--jp-ink);
+  text-decoration: none;
+}
+
+.wp-site-blocks .product .wp-block-post-title a:hover {
+  text-decoration: underline;
+}
+
+.wp-site-blocks .product .wc-block-components-product-price {
+  color: var(--jp-pine);
+  font-family: var(--jp-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-site-blocks :is(.wc-block-product, .products-block-post-template .product) :is(.wp-block-woocommerce-product-price, .wp-block-woocommerce-product-button) {
+  margin-block: .4rem 0 !important;
+}
+
+.wp-site-blocks :is(.wc-block-product, .products-block-post-template .product) .wc-block-components-product-price {
+  text-align: start;
+  font-size: .9375rem !important;
+}
+
+.wp-site-blocks .wp-block-woocommerce-product-button.align-center {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: start;
+}
+
+.wp-site-blocks :is(.wp-block-button__link, .single_add_to_cart_button, .wc-block-cart__submit-button),
+.wc-block-mini-cart__drawer .wp-element-button:not(.is-style-outline, .wc-block-components-drawer__close) {
+  background-color: var(--jp-pine);
+  color: var(--jp-white);
+  border-radius: 2px;
+  font-family: var(--jp-sans);
+}
+
+.wp-site-blocks .product .wp-block-woocommerce-product-button .wc-block-components-product-button__button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: .4rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--jp-ink);
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: .29em;
+  text-decoration-color: var(--jp-clay);
+  font-size: .875rem !important;
+  font-weight: 500;
+}
+
+.wp-site-blocks .product .wp-block-woocommerce-product-button .wc-block-components-product-button__button:hover {
+  color: var(--jp-clay);
+}
+
+body.archive.woocommerce main, body.single-product main,
+body.woocommerce-cart main, body.woocommerce-checkout main, body.woocommerce-account main {
+  padding-block-start: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.wp-site-blocks .woocommerce .woocommerce-breadcrumb,
+.wp-site-blocks .woocommerce-breadcrumb a, .wp-site-blocks .woocommerce-result-count {
+  color: var(--jp-muted);
+  font-size: .9rem;
+}
+
+.wp-site-blocks :is(.wp-block-query-title, main > h1, .product h1.wp-block-post-title) {
+  font-size: clamp(2.4rem, 5vw, 4.75rem);
+  line-height: 1.03;
+}
+
+.woocommerce.archive .wp-block-cover.alignwide {
+  border: 1px solid var(--jp-line);
+}
+
+.woocommerce.archive .wp-block-cover__background.has-background-dim {
+  opacity: .2;
+}
+
+.wp-site-blocks .woocommerce-ordering select, .wp-site-blocks .variations select,
+.wp-site-blocks .quantity input.qty {
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: .5rem .75rem;
+  border: 1px solid #808778;
+  border-radius: 2px;
+  background-color: var(--jp-white);
+  color: var(--jp-ink);
+  font: inherit;
+}
+
+.wp-site-blocks .woocommerce table.variations tr td select {
+  height: auto;
+  padding-block: .55rem;
+  line-height: 1.35;
+}
+
+.wp-site-blocks .wp-block-woocommerce-product-meta, .wp-site-blocks .wp-block-post-excerpt {
+  color: var(--jp-muted);
+}
+
+.single-product .wp-site-blocks .wp-block-woocommerce-product-meta {
+  border-top: 1px solid var(--jp-line);
+  padding-top: 1rem;
+}
+
+.wp-site-blocks .woocommerce-product-gallery__wrapper {
+  background: var(--jp-washi);
+}
+
+.wp-site-blocks .wp-block-separator {
+  border-color: var(--jp-line);
+}
+
+.wp-site-blocks .wp-block-woocommerce-cart-order-summary-block,
+.wp-site-blocks .wp-block-woocommerce-checkout-order-summary-block {
+  border: 1px solid var(--jp-line);
+  background: var(--jp-white);
+  padding: clamp(.75rem, 1.6vw, 1.5rem);
+}
+
+.wp-site-blocks .wp-block-woocommerce-checkout :where(input, select, textarea),
+.wp-site-blocks .wp-block-woocommerce-cart :where(input, select, textarea) {
+  accent-color: var(--jp-pine);
+}
+
+.wp-site-blocks .wc-block-components-checkout-place-order-button {
+  background: var(--jp-pine);
+  color: var(--jp-white);
+  border-radius: 2px;
+}
+
+/* Colophon retains the partner mark, contact details and original menu. */
+.wp-site-blocks > footer.wp-block-template-part {
+  margin-block-start: var(--jp-section-gap);
+  border-top: 1px solid var(--jp-line);
+  color: var(--jp-ink);
+}
+
+.wp-site-blocks > footer > .has-background {
+  background-color: #e2e5d9 !important;
+  padding-block: clamp(2.5rem, 5vw, 5rem) !important;
+}
+
+.wp-site-blocks > footer .wp-block-columns + .wp-block-group {
+  padding-top: 1.2rem !important;
+  margin-top: 2rem;
+  border-top: 1px solid #b8beae;
+}
+
+.wp-site-blocks > footer .wp-block-heading.has-body-font-family {
+  color: var(--jp-pine);
+  font-family: var(--jp-serif) !important;
+  font-size: 1.55rem !important;
+  font-weight: 400 !important;
+}
+
+.wp-site-blocks > footer :is(.wp-block-site-tagline, p, .wp-block-navigation) {
+  font-size: .9375rem;
+}
+
+@media (max-width: 781px) {
+  .wp-site-blocks > header .is-layout-flex:has(> .wp-block-woocommerce-customer-account) {
+    column-gap: .8rem;
+  }
+
+  .home .entry-content > .has-accent-background-color > .wp-block-columns {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 1.75rem;
+  }
+
+  .home .entry-content > .has-accent-background-color .is-vertically-aligned-center {
+    align-self: stretch;
+  }
+
+  .home .entry-content > .has-accent-background-color .wp-block-heading {
+    max-width: 17ch;
+    font-size: clamp(2.65rem, 7.2vw, 3.65rem);
+  }
+
+  .home .entry-content > .has-accent-background-color .wp-block-paragraph {
+    max-width: 62ch;
+  }
+
+  .home .entry-content > .has-accent-background-color .wp-block-columns .wp-block-columns {
+    height: clamp(15rem, 57vw, 25rem);
+  }
+
+  .home .wp-block-columns.kategorier-wide {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .kategorier-wide > .wp-block-column { grid-column: span 2; }
+  .kategorier-wide > .wp-block-column:nth-last-child(-n+2) { grid-column: span 3; }
+  .kategorier-wide > .wp-block-column:nth-last-child(-n+2) .wc-block-featured-category { aspect-ratio: 3 / 2; }
+
+  .wp-site-blocks .wc-block-product-template__responsive.columns-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wp-site-blocks > footer .wp-block-columns { gap: 1.5rem; }
+  .wp-site-blocks > footer .wp-block-column:empty { display: none; }
+}
+
+@media (max-width: 600px) {
+  .wp-site-blocks > header .wp-block-group.is-content-justification-space-between {
+    row-gap: .35rem;
+  }
+
+  .wp-site-blocks > header .is-content-justification-space-between > .wp-block-group:has(.wp-block-site-logo) {
+    margin-inline: auto;
+  }
+
+  .wp-site-blocks > header .wp-block-group:has(> .wp-block-woocommerce-customer-account) {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wp-site-blocks > header .wp-block-group:has(> .wp-block-woocommerce-customer-account) p {
+    margin-block: 0;
+  }
+
+  .wp-site-blocks > header .wp-block-paragraph a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .home .wp-block-columns.kategorier-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kategorier-wide > .wp-block-column:nth-child(n) { grid-column: auto; }
+  .kategorier-wide > .wp-block-column:nth-child(n) .wc-block-featured-category { aspect-ratio: 1 / 1; }
+  .kategorier-wide > .wp-block-column:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .kategorier-wide > .wp-block-column:last-child:nth-child(odd) .wc-block-featured-category { aspect-ratio: 2.1 / 1; }
+
+  .wp-site-blocks .wc-block-catalog-sorting { max-width: 100%; }
+  .wp-site-blocks .wp-block-group:has(> .wc-block-catalog-sorting) { flex-wrap: wrap; gap: .5rem; }
+  .wp-site-blocks .products-block-post-template.is-layout-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wp-site-blocks > footer :is(.wp-block-group, .wp-block-column) { min-width: 0; }
+}
+
+@media (max-width: 360px) {
+  .wp-site-blocks > header .is-layout-flex:has(> .wp-block-woocommerce-customer-account) { column-gap: .45rem; }
+  .wp-site-blocks > header .wp-block-paragraph a { font-size: .875rem; }
+}
+
+@media (forced-colors: active) {
+  .kategorier-wide .wc-block-featured-category__inner-blocks { background: Canvas; color: CanvasText; }
+  .kategorier-wide .wp-block-button .wp-element-button { color: LinkText; }
+}

@@ -1,0 +1,49 @@
+name: Release WordPress theme
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check PHP and updater
+        run: |
+          find . -type f -name '*.php' -print0 | xargs -0 -n 1 php -l
+          php scripts/test-updates.php
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify layout inheritance in WordPress
+        run: |
+          npx --yes @wp-playground/cli@3.1.65 run-blueprint --wp=7.1.5 --php=8.3 \
+            --mount=.:/wordpress/wp-content/themes/3dekoration-japandi \
+            --blueprint=tests/layout-blueprint.json
+      - name: Build installable ZIP
+        run: python3 scripts/package.py
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Package the tagged version
+        run: python3 scripts/package.py --tag "$GITHUB_REF_NAME"
+      - name: Publish release and WordPress ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/3dekoration-japandi.zip --verify-tag --notes-from-tag --title "3Dekoration Japandi $GITHUB_REF_NAME"
