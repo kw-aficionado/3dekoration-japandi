@@ -21,18 +21,13 @@ Du kan skifte tilbage ved at aktivere **Twenty Twenty-Four** under **Udseende �
 
 ## Automatiske opdateringer fra GitHub
 
-Det aktive tema henter nye, stabile versioner fra dette private repository. Giv WordPress læseadgang én gang:
+Fra version 1.0.0 kan det aktive tema hente stabile udgivelser anonymt fra det offentlige GitHub-repository.
 
-1. Opret en *fine-grained personal access token* i GitHub. Vælg kun `kw-aficionado/3dekoration-japandi` og giv **Contents → Read-only**.
-2. Gem værdien som serverens miljøvariabel **TREDEKORATION_GITHUB_TOKEN**. Hvis din hosting bruger `wp-config.php`, kan du i stedet indsætte følgende før linjen, der indlæser `wp-settings.php`. Erstat eksempelværdien lokalt på serveren.
+1. Hvis du tidligere har sat `TREDEKORATION_GITHUB_TOKEN` i `wp-config.php` eller som miljøvariabel på webhotellet, kan du fjerne den for at bruge anonym adgang. Et udløbet token kan få GitHub til at afvise forespørgslen.
+2. Åbn **Kontrolpanel → Opdateringer** og vælg **Kontrollér igen**. Et vellykket tjek rydder en eventuel tidligere advarsel.
+3. Gå til **Udseende → Temaer → 3Dekoration Japandi** og vælg **Aktivér automatiske opdateringer**. WordPress installerer nye releases ved sit almindelige opdateringstjek, når baggrundsopdateringer er tilladt på hosten.
 
-   ```php
-   define( 'TREDEKORATION_GITHUB_TOKEN', 'INDSÆT_DIT_LÆSETOKEN_HER' );
-   ```
-
-3. Åbn **Kontrolpanel → Opdateringer** og vælg **Kontrollér igen**. Gå til **Udseende → Temaer → 3Dekoration Japandi** og vælg **Aktivér automatiske opdateringer**. WordPress installerer herefter nye releases ved sit almindelige opdateringstjek, når baggrundsopdateringer er tilladt på hosten.
-
-Et udløbet token kan udskiftes samme sted. En fejl ved hentning af releaseoplysninger vises på temasiden og opdateringssiden. Temaet verificerer ZIP-filens SHA-256 mod GitHubs releaseoplysninger inden installation.
+Temaet kontrollerer ZIP-filens SHA-256 mod GitHubs releaseoplysninger inden installation.
 
 ## Udgiv en ny version
 
